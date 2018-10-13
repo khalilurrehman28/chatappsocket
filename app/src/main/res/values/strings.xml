@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">chatapp-socket</string>
+    <string name="setting">Setting</string>
+    <string name="send">SEND</string>
+    <string name="action_send">Send</string>
+    <string name="prompt_message">Message</string>
+    <string name="action_attach">ATTACH</string>
+    <string name="action_capture">CAPTURE IMAGE</string>
+</resources>
