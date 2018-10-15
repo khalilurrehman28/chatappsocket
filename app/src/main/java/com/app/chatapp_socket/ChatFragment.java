@@ -60,7 +60,7 @@ public class ChatFragment extends Fragment {
     private Socket socket;
     {
         try{
-            socket = IO.socket("http://192.168.1.2:8888");
+            socket = IO.socket("http://192.168.1.5:8888");
         }catch(URISyntaxException e){
             throw new RuntimeException(e);
         }
@@ -165,8 +165,7 @@ public class ChatFragment extends Fragment {
 
     }
 
-    public void sendImage(String path)
-    {
+    public void sendImage(String path) {
         JSONObject sendData = new JSONObject();
         try{
             sendData.put("image", encodeImage(path));
@@ -174,12 +173,11 @@ public class ChatFragment extends Fragment {
             addImage(bmp);
             socket.emit("message",sendData);
         }catch(JSONException e){
-
+            Log.d("chatFragment", "sendImage: "+e.getMessage());
         }
     }
 
     private void addMessage(String message) {
-
         mMessages.add(new Message.Builder(Message.TYPE_MESSAGE)
                 .message(message).build());
         // mAdapter = new MessageAdapter(mMessages);
@@ -199,8 +197,7 @@ public class ChatFragment extends Fragment {
         mMessagesView.scrollToPosition(mAdapter.getItemCount() - 1);
     }
 
-    private String encodeImage(String path)
-    {
+    private String encodeImage(String path) {
         File imagefile = new File(path);
         FileInputStream fis = null;
         try{
@@ -215,11 +212,9 @@ public class ChatFragment extends Fragment {
         String encImage = Base64.encodeToString(b, Base64.DEFAULT);
         //Base64.de
         return encImage;
-
     }
 
-    private Bitmap decodeImage(String data)
-    {
+    private Bitmap decodeImage(String data) {
         byte[] b = Base64.decode(data,Base64.DEFAULT);
         Bitmap bmp = BitmapFactory.decodeByteArray(b,0,b.length);
         return bmp;
